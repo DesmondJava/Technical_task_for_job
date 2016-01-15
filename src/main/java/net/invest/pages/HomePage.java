@@ -10,7 +10,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Vadym on 1/15/2016.
  */
-public class HomePage {
+public class HomePage implements IHomePage{
 
     public static final By LOGIN_LINK = By.xpath("//nav[@class='menuHeader']//span[.='Log in']");
     public static final By LOGIN_LINK_AFTER_LOG_OUT = By.id("button-1024-btnInnerEl");
@@ -25,17 +25,23 @@ public class HomePage {
         this.driver = driver;
     }
 
+    /**
+     * Click on the out name in the top right corner and open My profile
+     */
     public void openProfilePage(){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         if(Common_methods.isElementPresent(driver, USER_RIGHT_UP)){
             driver.findElement(USER_RIGHT_UP).click();
             driver.findElement(PROFILE_LINK_IN_MENU).click();
-
         } else{
             throw new NoSuchElementException("You need sign up before find this element!");
         }
     }
 
+    /**
+     * @return profile name in the top right corner.
+     * @throws NoSuchElementException if we are not sign in.
+     */
     public String getNameProfile() throws NoSuchElementException {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         if(Common_methods.isElementPresent(driver, USER_RIGHT_UP)){

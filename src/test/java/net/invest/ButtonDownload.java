@@ -67,7 +67,7 @@ public class ButtonDownload {
         Assert.assertTrue(profilePage.isButtonDownloadPresent());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"logInOnWebSite"})
     public void negativeTestJustOpenAndCloseFileUploadAndCheckButtonDownload(){
         driver.navigate().refresh();
         profilePage.clickChoosePhotoButton();
@@ -75,7 +75,7 @@ public class ButtonDownload {
         Assert.assertFalse(profilePage.isButtonDownloadPresent());
     }
 
-    @Test
+    @Test(dependsOnMethods = {"logInOnWebSite"})
     public void negativeTestUploadNotAPicture(){
         driver.navigate().refresh();
         // WARNING: Change line below on the different computers! This path to local file!

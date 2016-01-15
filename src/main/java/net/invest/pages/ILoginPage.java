@@ -6,4 +6,6 @@ package net.invest.pages;
 public interface ILoginPage {
 
     void logIn(String email, String password);
+    void logOut();
+
 }

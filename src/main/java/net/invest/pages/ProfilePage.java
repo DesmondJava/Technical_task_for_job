@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by Vadym on 1/15/2016.
  */
-public class ProfilePage extends HomePage {
+public class ProfilePage extends HomePage implements IProfilePage {
 
     public static final By DOWNLOAD_AVATAR_BUTTON = By.id("button-2318");
     public static final By CHOOSE_PHOTO_BUTTON = By.id("fileuploadfield-2315-button");
@@ -37,6 +37,9 @@ public class ProfilePage extends HomePage {
         ClipboardWindowsUploadFile.uploadFileByPath(pathToImage);
     }
 
+    /**
+     * Close window file upload just pressing 'Esc'
+     */
     public void closeFileUploadWindow(){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         Robot robot = null;

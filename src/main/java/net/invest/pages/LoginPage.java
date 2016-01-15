@@ -26,8 +26,8 @@ public class LoginPage extends HomePage implements ILoginPage{
     /**
      * Sign in on the website.
      *
-     * @param email    for login
-     * @param password for login.
+     * @param email    for Sign in
+     * @param password for Sign in
      */
     @Override
     public void logIn(String email, String password) {
@@ -52,11 +52,11 @@ public class LoginPage extends HomePage implements ILoginPage{
     /**
      * Log out on the website.
      */
-//    @Override
+    @Override
     public void logOut() {
         if(Common_methods.isElementPresent(driver, USER_RIGHT_UP)){
             driver.findElement(USER_RIGHT_UP).click();
-            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             driver.findElement(SIGN_OUT_IN_MENU).click();
         }
     }
