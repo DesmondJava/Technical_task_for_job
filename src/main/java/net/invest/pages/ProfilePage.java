@@ -1,5 +1,6 @@
 package net.invest.pages;
 
+import net.invest.utility.ClipboardWindowsUploadFile;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,31 +26,15 @@ public class ProfilePage extends HomePage {
         this.driver = driver;
     }
 
+    /**
+     * This method open window upload file, choose file and press enter
+     *
+     * @param pathToImage This is path which file we will upload in the window upload file.
+     */
     public void chooseFileUploadAvatar(String pathToImage) {
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         clickChoosePhotoButton();
-        // add our path img to clipboard
-        StringSelection stringSelection = new StringSelection(pathToImage);
-        Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-        try {
-            Robot robot = new Robot();
-            robot.delay(1000);
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);  // press ctrl + 'V' (sent path to input form)
-            Thread.sleep(1000);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER); // press enter
-            Thread.sleep(1000);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER); // press enter again
-            robot.delay(1000);
-            // Sometimes uploading so slow, around 15 sec.
-            Thread.sleep(25000);
-        }catch (AWTException | InterruptedException e){
-            e.printStackTrace();
-        }
+        ClipboardWindowsUploadFile.uploadFileByPath(pathToImage);
     }
 
     public void closeFileUploadWindow(){
@@ -60,17 +45,27 @@ public class ProfilePage extends HomePage {
             robot.delay(1000);
             robot.keyPress(KeyEvent.VK_ESCAPE);
             robot.keyRelease(KeyEvent.VK_ESCAPE);
-        } catch (AWTException e) {
+            robot.delay(1000);
+            Thread.sleep(5000);
+        } catch (AWTException | InterruptedException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Click the link 'Choose photo' in the profile user
+     */
     public void clickChoosePhotoButton(){
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
         driver.findElement(CHOOSE_PHOTO_BUTTON).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
+    /**
+     * This method is checking attribute in the button 'Download'
+     *
+     * @return true if button present on the profile page or false if not
+     */
     public boolean isButtonDownloadPresent(){
         String cssClassesInDownloadButton = driver.findElement(DOWNLOAD_AVATAR_BUTTON).getAttribute("style");
         String classButtonDisabled = "display: none;";

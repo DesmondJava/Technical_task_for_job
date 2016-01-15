@@ -35,7 +35,7 @@ public class ButtonDownload {
         };
     }
 
-    @DataProvider(name = "PathImage", parallel = false)
+    @DataProvider(name = "pathImage", parallel = false)
     public static Object[][] testDataPathImage() {
         return new Object[][]{
                 new Object[]{
@@ -60,14 +60,14 @@ public class ButtonDownload {
         Assert.assertTrue(homePage.getNameProfile().equals(nameAccount));
     }
 
-    @Test(dataProvider = "PathImage", dependsOnMethods = {"logInOnWebSite"})
+    @Test(dataProvider = "pathImage", dependsOnMethods = {"logInOnWebSite"})
     public void checkButtonDownloadAppearAfterChooseAvatar(String pathToImage){
         homePage.openProfilePage();
         profilePage.chooseFileUploadAvatar(pathToImage);
         Assert.assertTrue(profilePage.isButtonDownloadPresent());
     }
 
-    @Test(dependsOnMethods = {"checkButtonDownloadAppearAfterChooseAvatar"})
+    @Test
     public void negativeTestJustOpenAndCloseFileUploadAndCheckButtonDownload(){
         driver.navigate().refresh();
         profilePage.clickChoosePhotoButton();
@@ -75,10 +75,11 @@ public class ButtonDownload {
         Assert.assertFalse(profilePage.isButtonDownloadPresent());
     }
 
-    @Test(dependsOnMethods = {"negativeTestJustOpenAndCloseFileUploadAndCheckButtonDownload"})
+    @Test
     public void negativeTestUploadNotAPicture(){
         driver.navigate().refresh();
-        String pathToTxtFile = "";
+        // WARNING: Change line below on the different computers! This path to local file!
+        String pathToTxtFile = "C:\\testFile.txt";
         profilePage.chooseFileUploadAvatar(pathToTxtFile);
         Assert.assertFalse(profilePage.isButtonDownloadPresent());
     }
