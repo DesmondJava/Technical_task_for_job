@@ -32,6 +32,7 @@ public class LoginPage extends HomePage implements ILoginPage{
     @Override
     public void logIn(String email, String password) {
         // Check if we already login in website => logout
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         if(Common_methods.isElementPresent(driver, USER_RIGHT_UP)){
             driver.findElement(USER_RIGHT_UP).click();
             driver.findElement(SIGN_OUT_IN_MENU).click();
