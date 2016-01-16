@@ -23,12 +23,14 @@ public class ClipboardWindowsUploadFile {
             Thread.sleep(1000);
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER); // press enter
-            Thread.sleep(1000);
+            Thread.sleep(2000);
+            robot.delay(1000);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER); // press enter again
             robot.keyPress(KeyEvent.VK_ENTER);
             robot.keyRelease(KeyEvent.VK_ENTER); // press enter again
             robot.delay(1000);
-            // Sometimes uploading so slow, around 15 sec.
-            Thread.sleep(25000);
+            Thread.sleep(5000);
         } catch (AWTException | InterruptedException e) {
             e.printStackTrace();
         }

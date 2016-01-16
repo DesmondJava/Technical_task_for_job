@@ -48,6 +48,10 @@ public class ProfilePage extends HomePage implements IProfilePage {
             robot.delay(1000);
             robot.keyPress(KeyEvent.VK_ESCAPE);
             robot.keyRelease(KeyEvent.VK_ESCAPE);
+            robot.keyPress(KeyEvent.VK_ESCAPE);
+            robot.keyRelease(KeyEvent.VK_ESCAPE);
+            robot.keyPress(KeyEvent.VK_ESCAPE);
+            robot.keyRelease(KeyEvent.VK_ESCAPE);
             robot.delay(1000);
             Thread.sleep(5000);
         } catch (AWTException | InterruptedException e) {
